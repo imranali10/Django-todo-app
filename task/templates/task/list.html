@@ -1,0 +1,78 @@
+{% extends 'task/main.html' %} {% block content%}
+
+<div class="container">
+  <div class="my-4">
+    <ul class="list-group">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center text-light bg-secondary"
+      >
+        Number of Tasks
+        <span class="badge badge-primary badge-pill">{{no_of_task}}</span>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center text-light bg-secondary"
+      >
+        Task Completed
+        <span class="badge badge-primary badge-pill"
+          >{{no_of_task_complete}}</span
+        >
+      </li>
+    </ul>
+  </div>
+  <hr />
+  <h2 class="my-3">Start Adding New Tasks</h2>
+  <div class="p-4 bg-dark rounded-sm">
+    <form method="POST" action="/">
+      {% csrf_token %} {{form.title}}
+      <button type="submit" class="btn btn-primary my-2">Save</button>
+    </form>
+  </div>
+  <br />
+
+  {% for task in tasks %}
+
+  <div>
+    <div class="">
+      <ul class="list-group">
+        {% if task.complete == True %}
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <strike>{{task}}</strike>
+
+          <span>
+            <a
+              class="btn btn-info btn-sm"
+              href="{% url 'update_task' task.id %}"
+              >Update</a
+            >
+            <a class="btn btn-danger btn-sm" href="{% url 'delete' task.id %}"
+              >Delete</a
+            ></span
+          >
+        </li>
+        {% else%}
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          {{task}}
+          <span>
+            <a
+              class="btn btn-info btn-sm"
+              href="{% url 'update_task' task.id %}"
+              >Update</a
+            >
+            <a class="btn btn-danger btn-sm" href="{% url 'delete' task.id %}"
+              >Delete</a
+            ></span
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <br />
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

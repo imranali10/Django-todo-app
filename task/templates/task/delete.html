@@ -1,0 +1,21 @@
+{% extends 'task/main.html' %} {% block content %}
+<div class="container my-4">
+  <div class="p-4 bg-secondary rounded-sm">
+    <p style="font-size: large">Are you sure you want to delete "{{item}}"?</p>
+
+    <a class="btn btn-info btn-sm" href="{% url 'list' %}">Cancel</a>
+
+    <form action="" method="post">
+      {% csrf_token %}
+      <button
+        class="btn btn-danger btn-sm my-3"
+        type="submit"
+        name="Update Task"
+      >
+        Yes, Delete
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
