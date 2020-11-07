@@ -1,2 +1,2 @@
 # Django-todo-app
-#To do List App using Django
+To do List App using Django
